@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <!-- Criar link HTML e CSS -->
+    <link rel="stylesheet" href="static/estilo.css">
+    <!-- Adicionar o ícone (favicon) do site -->
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+</head>
+
+<body class="login">
+    <img id="logo" src="/static/img/Logo texto.png">
+    <div class="formulario">
+        <form action="/login" method="POST">
+            <h2>Login</h2>
+            <p>Usuário</p>
+            <!-- Adiciona ENTRADA DE TEXTO -->
+            <input type='email' id='email' name='email' placeholder="Digite seu usuário">
+
+            <p>Senha</p>
+            <!-- Adiciona ENTRADA DE SENHA -->
+            <input type='senha' id='senha' name='senha' placeholder="Digite sua senha">
+            <br>
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="resposta">
+                {% for message in messages %}
+                <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+            {% block body %}{% endblock %}
+            <br>
+            <div class="botoes">
+                <!-- <a href="">Entrar</a> -->
+                <button type="submit">Entrar</button>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+
+</html>
