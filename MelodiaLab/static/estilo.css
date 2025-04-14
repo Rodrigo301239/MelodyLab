@@ -166,3 +166,21 @@ body#home {
     font-size: 14px;
     color: #666;
 }
+
+div.informacoes{
+    width: 200px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    text-align: left;
+    flex: 1; /* Ocupa o resto do espaço */
+
+}
+div.bot {
+    padding: 10px;
+    font-size: 14px;
+    width: 200px;
+}
+

@@ -12,9 +12,8 @@ def criar_tabela():
     
     cursor.execute("CREATE table if not exists usuarios (email text primary key, nome text, senha text)")
     
-    cursor.execute ('''create table if not exists tarefas
-                    (id integer primary key,conteudo text,esta_concluida integer,email_usuario text,
-                    FOREIGN KEY(email_usuario) REFERENCES usuarios(email))''')
+    cursor.execute("CREATE table if not exists musicas (id text primary key,id_usuario text, nome_musica text, artista text, status text, letra text, imagem text)")
+    
     
     conexao.commit()
     
@@ -31,7 +30,7 @@ def criar_conta(cadastrar):
         return False
     
     senha_criptografada = generate_password_hash (cadastrar['senha'])
-    cursor.execute("INSERT into usuarios(email,nome,senha) VALUES (?,?,?)", (cadastrar ['email'], cadastrar['usuario'], senha_criptografada))
+    cursor.execute("INSERT into usuarios (email,nome,senha) VALUES (?,?,?)", (cadastrar ['email'], cadastrar['usuario'], senha_criptografada))
     conexao.commit()
     return True
 
@@ -51,6 +50,24 @@ def excluir_usuario(email):
     cursor.execute('DELETE FROM usuarios WHERE email=?',(email,))
     conexao.commit()
     return True
+
+def criar_musica(id_usuario,nome_musica, artista, status, imagem, letra):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    cursor.execute("INSERT into musicas (id_usuario,nome_musica, artista, status, letra, imagem) VALUES (?,?,?,?,?,?)", (id_usuario, nome_musica, artista, status, imagem, letra))
+    conexao.commit()
+    cursor.close()
+    conexao.close()
+    return True
+
+#def buscar_musica (id_usuario):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    cursor.execute("SELECT nome_musica, artista, status, imagem, letra from musicas where id_usuario = ?",(id_usuario))
+    musicas = cursor.fetchall()
+    return musicas
    
     
     

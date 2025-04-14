@@ -12,7 +12,10 @@ def index():
 
 @app.route('/home')
 def home():
-    return render_template('home.html')
+    
+   return render_template('home.html')
+
+
 
 @app.route("/login",methods = ["GET","POST"])
 def login():
@@ -47,6 +50,30 @@ def excluir_usuario():
         return redirect(url_for('login'))
     else:
         return "Ocorreu um erro ao excluir o usuário"
+
+@app.route('/criar',methods = ["GET","POST"])
+def criar():
+    if request.method == "GET":
+        return render_template('criar.html')
+    
+    if request.method == "POST":
+        form = request.form
+        nome_musica = form ['nome_musica']
+        artista = form ['artista']
+        status = form ['status']
+        imagem = form ['imagem']
+        letra = form ['letra']
+        id_usuario = session ['usuario']
+        
+        if database.criar_musica (id_usuario, nome_musica, artista, status, imagem, letra):
+            return redirect(url_for('home'))
+        else:
+            return "agua gelada"
+    
+        
+    
+  
+    
 
     
 
