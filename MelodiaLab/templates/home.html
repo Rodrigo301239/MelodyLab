@@ -19,25 +19,36 @@
         <h2>Minhas Criações</h2>
         <div class="cards-container">
           <!-- Card de projeto musical -->
-          <div class="card">
-            <img src="/static/img/capa1.jpeg" alt="Capa do Projeto" class="cover">
-            <div class="card-content">
-              <h3>Nome da Música</h3>
-              <p>Artista: Seu Nome</p>
-              <p>Status: Em composição</p>
-              <p>Letra: Viciado em adrenalina, só sinto amor quando a gente briga...</p>
+          
+          {% for musica in musicas %}
+          
+            <div class="card">
+
+              <img src="{{musica[5]}}" class="cover" alt="imagem">
+              
+              <div class="card-content">
+                
+
+                <div class="botoes">
+                  <a href="/editar">+ editar </a>
+
+                </div>
+
+
+                
+
+
+                <h3>{{musica[2]}} </h3>
+                <p>Artista: {{musica[3]}}</p>
+                <p>Status:  {{musica[4]}}</p>
+                <p>Letra:  {{musica[5]}}</p>
+              </div>
             </div>
-          </div>
-  
-          <div class="card">
-            <img src="/static/img/capa2.jpeg" alt="Capa do Projeto" class="cover">
-            <div class="card-content">
-              <h3>Outra Música</h3>
-              <p>Artista: Seu Nome</p>
-              <p>Status: Em gravação</p>
-              <p>Letra: Eu te levei para meu templo, vulnerável com meus sentimentos...</p>
-            </div>
-          </div>
+            
+          {% endfor %}
+            
+          
+            
   
           <!-- Mais cards podem ser adicionados aqui -->
         </div>

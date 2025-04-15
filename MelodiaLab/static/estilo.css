@@ -124,8 +124,8 @@ body#home {
   
 .card {
     display: flex;
-    width: 400px;
-    height: 200px;
+    width: 500px;
+    height: 300px;
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -141,7 +141,7 @@ body#home {
 
 .cover {
     width: 200px; /* quadrado */
-    height: 200px;
+    height: 300px;
     object-fit: cover;
     flex-shrink: 0; /* Não deixa a imagem encolher */
 }
@@ -183,4 +183,7 @@ div.bot {
     font-size: 14px;
     width: 200px;
 }
-
+div.but {
+    font-size: 14px;
+    width: 500px;
+}

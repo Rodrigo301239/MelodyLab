@@ -2,7 +2,7 @@ import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 
 def conectar_banco():
-    conexao = sqlite3.connect("tarefas.db")
+    conexao = sqlite3.connect("musicas.db")
     return conexao
 
 
@@ -46,7 +46,7 @@ def login(formulario):
 def excluir_usuario(email):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    cursor.execute('DELETE FROM tarefas WHERE email_usuario=?',(email,))
+    #cursor.execute('DELETE FROM usuarios WHERE email_usuario=?',(email,))
     cursor.execute('DELETE FROM usuarios WHERE email=?',(email,))
     conexao.commit()
     return True
@@ -55,19 +55,19 @@ def criar_musica(id_usuario,nome_musica, artista, status, imagem, letra):
     conexao = conectar_banco()
     cursor = conexao.cursor()
     
-    cursor.execute("INSERT into musicas (id_usuario,nome_musica, artista, status, letra, imagem) VALUES (?,?,?,?,?,?)", (id_usuario, nome_musica, artista, status, imagem, letra))
+    cursor.execute("INSERT into musicas (id_usuario,nome_musica, artista, status, letra, imagem) VALUES (?,?,?,?,?,?)", (id_usuario, nome_musica, artista, status, letra, imagem))
     conexao.commit()
     cursor.close()
     conexao.close()
     return True
 
-#def buscar_musica (id_usuario):
+
+def pegar_musicas (email):
     conexao = conectar_banco()
     cursor = conexao.cursor()
     
-    cursor.execute("SELECT nome_musica, artista, status, imagem, letra from musicas where id_usuario = ?",(id_usuario))
-    musicas = cursor.fetchall()
-    return musicas
+    cursor.execute("SELECT * FROM musicas WHERE id_usuario = ?", (email,))
+    return cursor.fetchall()
    
     
     

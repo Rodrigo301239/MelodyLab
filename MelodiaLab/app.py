@@ -12,8 +12,8 @@ def index():
 
 @app.route('/home')
 def home():
-    
-   return render_template('home.html')
+     musicas = database.pegar_musicas(session ['usuario'])
+     return render_template('home.html',musicas = musicas)
 
 
 
@@ -56,7 +56,7 @@ def criar():
     if request.method == "GET":
         return render_template('criar.html')
     
-    if request.method == "POST":
+    elif request.method == "POST":
         form = request.form
         nome_musica = form ['nome_musica']
         artista = form ['artista']
@@ -64,13 +64,20 @@ def criar():
         imagem = form ['imagem']
         letra = form ['letra']
         id_usuario = session ['usuario']
-        
-        if database.criar_musica (id_usuario, nome_musica, artista, status, imagem, letra):
-            return redirect(url_for('home'))
-        else:
-            return "agua gelada"
+        database.criar_musica (id_usuario, nome_musica, artista, status, letra, imagem)
+        return redirect(url_for('home'))
     
-        
+    else:
+        return "agua gelada"
+    
+    
+@app.route('/editar', methods = ["GET","POST"])
+def editar():
+    if request.method == "GET":
+        return render_template('editar.html')
+    
+    else:
+        print("davi viado")
     
   
     
