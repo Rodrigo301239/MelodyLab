@@ -16,20 +16,22 @@
         <h2>Editar musica</h2>
         <!-- ADICIONAR O FORM AO INICIO -->
         <form action="/editar" method="POST">
-            <p>Usuário</p>
-            <input type='text' name='usuario' placeholder="Digite seu usuário">
-            <p>E-mail</p>
-            <input type='text' name='email' placeholder="Digite seu usuário">
-            <p>Senha</p>
-            <input type='password' name='senha' placeholder="Digite sua senha">
-            <p>Confirme sua senha</p>
-            <input type='password' name='confirmar_senha' placeholder="Digite sua senha">
+            <p>nome da musica</p>
+            <input type='text' name='nome_musica' placeholder="Digite o nome da musica">
+            <p>nome do artista</p>
+            <input type='text' name='artista' placeholder="Digite o nome do artista">
+            <p>status da musica</p>
+            <input type='status' name='status' placeholder="Digite o status da musica">
+            <p>Letra</p>
+            <input type='letra' name='letra' placeholder="Digite a letra da musica">
+            <p>Imagem</p>
+            <input type='imagem' name='imagem' placeholder="Digite o URL da imagem">
             <br>
             <br>
             <div class="botoes">
                 <!-- <a href="">Criar conta</a> -->
                 <!-- Mudar o a para um button -->
-                <button type="submit">Criar conta</button>
+                <button type="submit">Editar</button>
             </div>
             <!-- FECHAR O FORMS AO FIM -->
         </form>

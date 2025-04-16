@@ -64,6 +64,7 @@ def criar():
         imagem = form ['imagem']
         letra = form ['letra']
         id_usuario = session ['usuario']
+        
         database.criar_musica (id_usuario, nome_musica, artista, status, letra, imagem)
         return redirect(url_for('home'))
     
@@ -73,11 +74,24 @@ def criar():
     
 @app.route('/editar', methods = ["GET","POST"])
 def editar():
+
     if request.method == "GET":
         return render_template('editar.html')
     
+    elif request.method == "POST":
+        form = request.form
+        nome_musica = form ['nome_musica']
+        artista = form ['artista']
+        status = form ['status']
+        imagem = form ['imagem']
+        letra = form ['letra']
+        email = session ['usuario']
+
+        database.editar_musicas(email, nome_musica, artista, status, letra, imagem)
+        return redirect(url_for('home'))
+    
     else:
-        print("davi viado")
+        return "deu ruim"
     
   
     

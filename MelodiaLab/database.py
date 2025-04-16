@@ -54,8 +54,8 @@ def excluir_usuario(email):
 def criar_musica(id_usuario,nome_musica, artista, status, imagem, letra):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    
-    cursor.execute("INSERT into musicas (id_usuario,nome_musica, artista, status, letra, imagem) VALUES (?,?,?,?,?,?)", (id_usuario, nome_musica, artista, status, letra, imagem))
+
+    cursor.execute("INSERT into musicas (id,id_usuario,nome_musica, artista, status, letra, imagem) VALUES (?,?,?,?,?,?,?)", (id_usuario, nome_musica, artista, status, letra, imagem))
     conexao.commit()
     cursor.close()
     conexao.close()
@@ -68,6 +68,18 @@ def pegar_musicas (email):
     
     cursor.execute("SELECT * FROM musicas WHERE id_usuario = ?", (email,))
     return cursor.fetchall()
+
+
+def editar_musicas(email,nome_musica, artista, status, letra, imagem):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+
+    cursor.execute("UPDATE musicas SET nome_musica = ?,artista = ?,status = ?,imagem = ?,letra = ? WHERE id = ?"
+                   ,(nome_musica,artista,status,imagem,letra,email))
+    
+    conexao.commit()
+    cursor.close()
+    conexao.close()
    
     
     
