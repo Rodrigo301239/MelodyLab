@@ -12,7 +12,7 @@ def criar_tabela():
     
     cursor.execute("CREATE table if not exists usuarios (email text primary key, nome text, senha text)")
     
-    cursor.execute("CREATE table if not exists musicas (id text primary key,id_usuario text, nome_musica text, artista text, status text, letra text, imagem text)")
+    cursor.execute("CREATE table if not exists musicas (id integer primary key,id_usuario text, nome_musica text, artista text, status text, letra text, imagem text)")
     
     
     conexao.commit()
@@ -46,7 +46,7 @@ def login(formulario):
 def excluir_usuario(email):
     conexao = conectar_banco()
     cursor = conexao.cursor()
-    #cursor.execute('DELETE FROM usuarios WHERE email_usuario=?',(email,))
+    cursor.execute('DELETE FROM musicas WHERE id_usuario=?',(email,))
     cursor.execute('DELETE FROM usuarios WHERE email=?',(email,))
     conexao.commit()
     return True
@@ -55,7 +55,7 @@ def criar_musica(id_usuario,nome_musica, artista, status, imagem, letra):
     conexao = conectar_banco()
     cursor = conexao.cursor()
 
-    cursor.execute("INSERT into musicas (id,id_usuario,nome_musica, artista, status, letra, imagem) VALUES (?,?,?,?,?,?,?)", (id_usuario, nome_musica, artista, status, letra, imagem))
+    cursor.execute("INSERT into musicas (id_usuario,nome_musica, artista, status, letra, imagem) VALUES (?,?,?,?,?,?)", (id_usuario, nome_musica, artista, status, letra, imagem))
     conexao.commit()
     cursor.close()
     conexao.close()
@@ -69,19 +69,37 @@ def pegar_musicas (email):
     cursor.execute("SELECT * FROM musicas WHERE id_usuario = ?", (email,))
     return cursor.fetchall()
 
+def buscar_musicas(id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor()
+    
+    cursor.execute("SELECT * FROM musicas WHERE id = ?",(id,))
+    id = cursor.fetchone()
+    
+    return id
 
-def editar_musicas(email,nome_musica, artista, status, letra, imagem):
+
+def editar_musicas(id,email,nome_musica, artista, status, letra, imagem):
     conexao = conectar_banco()
     cursor = conexao.cursor()
 
-    cursor.execute("UPDATE musicas SET nome_musica = ?,artista = ?,status = ?,imagem = ?,letra = ? WHERE id = ?"
-                   ,(nome_musica,artista,status,imagem,letra,email))
+    cursor.execute("UPDATE musicas SET nome_musica = ?,artista = ?,status = ?,imagem = ?,letra = ? WHERE id_usuario = ? AND id = ?"
+                   ,(nome_musica,artista,status,imagem,letra,email,id))
     
     conexao.commit()
     cursor.close()
     conexao.close()
-   
     
+def excluir_musica(id):
+    conexao = conectar_banco()
+    cursor = conexao.cursor() 
+    
+    cursor.execute("DELETE FROM musicas WHERE id = ?", (id,))
+    conexao.commit()
+    cursor.close()
+    conexao.close()
+    
+    return True
     
 
 # PARTE PRINCIPAL DO PROGRAMA

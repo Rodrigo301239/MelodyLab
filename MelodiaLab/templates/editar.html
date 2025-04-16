@@ -15,17 +15,17 @@
     <div class="cadastrar">
         <h2>Editar musica</h2>
         <!-- ADICIONAR O FORM AO INICIO -->
-        <form action="/editar" method="POST">
+        <form action="/editar/{{id}}" method="POST">
             <p>nome da musica</p>
-            <input type='text' name='nome_musica' placeholder="Digite o nome da musica">
+            <input type='text' name='nome_musica' placeholder="Digite o nome da musica" value="{{musica[2]}}">
             <p>nome do artista</p>
-            <input type='text' name='artista' placeholder="Digite o nome do artista">
+            <input type='text' name='artista' placeholder="Digite o nome do artista" value="{{musica[3]}}">
             <p>status da musica</p>
-            <input type='status' name='status' placeholder="Digite o status da musica">
+            <input type='status' name='status' placeholder="Digite o status da musica" value="{{musica[4]}}">
             <p>Letra</p>
-            <input type='letra' name='letra' placeholder="Digite a letra da musica">
+            <input type='letra' name='letra' placeholder="Digite a letra da musica" value="{{musica[5]}}">
             <p>Imagem</p>
-            <input type='imagem' name='imagem' placeholder="Digite o URL da imagem">
+            <input type='imagem' name='imagem' placeholder="Digite o URL da imagem" value="{{musica[6]}}">
             <br>
             <br>
             <div class="botoes">

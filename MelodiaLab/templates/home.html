@@ -8,15 +8,19 @@
 </head>
 <body id="home">
     <img id="logo-home" src="/static/img/Logo texto.png">
+    
    
     <div class="botoes">
         <a href="/apagar">+ Apagar sua conta</a>
         <a href="/criar"> + Criar uma música</a>
+        <a href="/logout"> +nada</a>
+
     </div>.
     
       <!-- Seção de "Minhas Criações" -->
       <section class="my-creations">
         <h2>Minhas Criações</h2>
+        
         <div class="cards-container">
           <!-- Card de projeto musical -->
           
@@ -30,9 +34,12 @@
               <div class="card-content">
                 
                 <div class="botoes">
-                  <a href="/editar">+ editar </a>
+                  <a href="/editar/{{musica[0]}}">+ editar </a>
+                  <a href="/excluir/{{musica[0]}}">+ excluir </a>
 
                 </div>
+
+              
 
                 <h3>{{musica[2]}} </h3>
                 <p>Artista: {{musica[3]}}</p>

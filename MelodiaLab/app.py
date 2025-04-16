@@ -3,7 +3,7 @@ app = Flask(__name__)
 app.secret_key = "chave_muito_segura"
 import database
 
-# Cria um dicionário e usuários e senha, SERÁ MIGRADO PARA O BANCO DE DADOS
+contador = 0
 
 
 @app.route('/') #rota para a página inicial
@@ -57,6 +57,7 @@ def criar():
         return render_template('criar.html')
     
     elif request.method == "POST":
+        
         form = request.form
         nome_musica = form ['nome_musica']
         artista = form ['artista']
@@ -65,18 +66,21 @@ def criar():
         letra = form ['letra']
         id_usuario = session ['usuario']
         
+        
         database.criar_musica (id_usuario, nome_musica, artista, status, letra, imagem)
+        
         return redirect(url_for('home'))
     
     else:
         return "agua gelada"
     
     
-@app.route('/editar', methods = ["GET","POST"])
-def editar():
+@app.route('/editar/<int:id>', methods = ["GET","POST"])
+def editar(id):
 
     if request.method == "GET":
-        return render_template('editar.html')
+        musica = database.buscar_musicas(id)
+        return render_template('editar.html', id=id, musica = musica)
     
     elif request.method == "POST":
         form = request.form
@@ -86,13 +90,27 @@ def editar():
         imagem = form ['imagem']
         letra = form ['letra']
         email = session ['usuario']
+        
 
-        database.editar_musicas(email, nome_musica, artista, status, letra, imagem)
+        database.editar_musicas(id,email, nome_musica, artista, status, letra, imagem)
         return redirect(url_for('home'))
     
     else:
         return "deu ruim"
     
+
+@app.route('/excluir/<int:id>')
+def excluir(id):
+    if database.excluir_musica(id) == True:
+        return redirect(url_for('home'))
+    else:
+        return "erro"
+
+
+@app.route('/logout')
+def logout():
+    
+    return redirect(url_for('login'))
   
     
 
